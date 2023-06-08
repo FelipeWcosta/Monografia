@@ -14,8 +14,8 @@ class Perceptron(object):
     self.eta = eta
     self.Wj = np.zeros(n_Xj + 1)
     
-  def predict(self, inputs):
-    z = np.dot(self.Wj[1:], inputs) + self.Wj[0]
+  def predict(self, input):
+    z = np.dot(self.Wj[1:], input) + self.Wj[0]
     if z >= 0:
       return 1
     else:
@@ -29,12 +29,14 @@ class Perceptron(object):
         self.Wj[0] += self.eta*(label - prediction)
 
 if __name__ == "__main__":
+    #Entradas
     Xj = []
     Xj.append(np.array([1,1]))
     Xj.append(np.array([1,0]))
     Xj.append(np.array([0,1]))
     Xj.append(np.array([0,0]))
 
+    #Saídas
     y = np.array([1,1,1,0])
 
     or_percep = Perceptron(n_Xj = 2, i=200, eta=0.1)
