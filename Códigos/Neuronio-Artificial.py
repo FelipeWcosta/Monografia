@@ -2,7 +2,7 @@ import numpy as np
 
 class Perceptron(object):
   
-  def __init__(self, n_Xj, i=100, eta = 0.01):
+  def __init__(self, n_Xj, i = 100, eta = 0.01):
     self.i = i
     self.eta = eta
     self.Wj = np.zeros(n_Xj +1)
