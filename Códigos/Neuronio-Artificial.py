@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     y = np.array([1,0,0,0])
 
-    and_perceptron = Perceptron(2,i=200, eta=0.1)
+    and_perceptron = Perceptron(2, si=200, eta=0.1)
     and_perceptron.train(Xj, y)
 
     inputs = np.array([1,1])
