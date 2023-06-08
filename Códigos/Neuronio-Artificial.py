@@ -1,81 +1,49 @@
 import numpy as np
+class perceptron(object):
+    """
+        eta: Coeficiente de treinamento
+        i: Número de iterações
+        n_Xj: Número de entradas
 
-class Perceptron(object):
-    """Perceptron network"""
-
-    def __init__(self, no_of_inputs, threshold=1000, learning_rate=0.001):
-        """
-        Args:
-            no_of_inputs (int): Número de entradas
-            threshold (int): Número de iterações
-            learning_rate (float): Taxa de aprendizado
-        """
-        self.threshold = threshold
-        self.learning_rate = learning_rate
-        self.weights = np.zeros(no_of_inputs + 1)
+        Wj: Vetor de pesos iniciado com zeros
+    """
+    def __init__(self, n_Xj, eta = 0.01, i = 100):
+        self.eta = eta
+        self.i = i
+        self.Wj = np.zeros(n_Xj + 1)
 
     def predict(self, inputs):
-        """
-        Função para predizer a saída
-
-        Args:
-            inputs (array): Entradas
-
-        Returns:
-            activation (int): Saída
-        """
-
-        summation = np.dot(inputs, self.weights[1:]) + self.weights[0]
-        if summation > 0:
-            activation = 1
+        z = np.dot(inputs, self.Wj[1:]) + self.Wj[0]
+        if z >= 0:
+            sigma = 1
         else:
-            activation = 0
-        return activation
+            sigma = 0
+        return sigma
+    
+    """
+        Xj: Entradas de treinamento
+        y: Saídas esperadas
+    """
 
-    def train(self, training_inputs, labels):
-        """
-        Função para treinar a rede
-
-        Args:
-            training_inputs (array): Entradas
-            labels (array): Saídas
-        """
-
-        for _ in range(self.threshold):
-            for inputs, label in zip(training_inputs, labels):
-                prediction = self.predict(inputs)
-                self.weights[1:] += self.learning_rate * (label - prediction) * inputs
-                self.weights[0] += self.learning_rate * (label - prediction)
-
+    def fit(self, Xj, y):
+        for _ in range(self.i):
+            for inputs, labels in zip(Xj, y):
+                predicao = self.predict(inputs)
+                self.Wj += self.eta*(labels - predicao)*inputs
+                self.Wj += self.eta*(labels - predicao)
 
 if __name__ == "__main__":
-    # Entradas
-    training_inputs = []
-    training_inputs.append(np.array([0, 0]))
-    training_inputs.append(np.array([0, 1]))
-    training_inputs.append(np.array([1, 0]))
-    training_inputs.append(np.array([1, 1]))
 
-    # Saídas
-    labels = np.array([1, 0, 0, 1])
+    #Entradas para treinamento
+    Xj = []
+    Xj.append(np.array([0, 0]))
+    Xj.append(np.array([0, 1]))
+    Xj.append(np.array([1, 0]))
+    Xj.append(np.array([1, 1]))
+    print(Xj)
 
-    # Criando a rede
-    perceptron = Perceptron(2)
+    #Saídas esperadas
+    y = np.array([1, 0, 0, 1])
 
-    # Treinando a rede
-    perceptron.train(training_inputs, labels)
-
-    # Testando a rede
-    inputs = np.array([1, 1])
-    print(perceptron.predict(inputs))
-
-    inputs = np.array([0, 1])
-    print(perceptron.predict(inputs))
-
-    inputs = np.array([0, 0])
-    print(perceptron.predict(inputs))
-
-    inputs = np.array([1, 0])
-    print(perceptron.predict(inputs))
-
-    print(perceptron.weights)
+    #Neurônio artificial
+    na = perceptron(0.01, 50, 2)
