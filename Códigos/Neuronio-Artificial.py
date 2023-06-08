@@ -9,10 +9,10 @@ class Perceptron(object):
     Wj: Vetor de pesos
   """
   
-  def __init__(self, n_Xj, i = 100, eta = 0.01):
+  def __init__(self, n_Xj, i, eta):
     self.i = i
     self.eta = eta
-    self.Wj = np.zeros(n_Xj +1)
+    self.Wj = np.zeros(n_Xj + 1)
     
   def predict(self, inputs):
     z = np.dot(self.Wj[1:], inputs) + self.Wj[0]
@@ -37,12 +37,16 @@ if __name__ == "__main__":
 
     y = np.array([1,1,1,0])
 
-    or_percep = Perceptron(2, i=200, eta=0.1)
+    or_percep = Perceptron(n_Xj = 2, i=200, eta=0.1)
     or_percep.train(Xj, y)
-
+    
+    #Teste nº 1
     inputs = np.array([1,1])
     print(or_percep.predict(inputs))
 
-
+    #Teste nº 2
     inputs = np.array([0,1])
     print(or_percep.predict(inputs))
+
+    #Pesos
+    print(or_percep.Wj)
