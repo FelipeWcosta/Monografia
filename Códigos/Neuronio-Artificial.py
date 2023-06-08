@@ -1,6 +1,13 @@
 import numpy as np
 
 class Perceptron(object):
+  """
+    n_Xj: Número de entradas
+    i: Número de iterações
+    eta: Coeficiente de apredizagem
+
+    Wj: Vetor de pesos
+  """
   
   def __init__(self, n_Xj, i = 100, eta = 0.01):
     self.i = i
@@ -28,14 +35,14 @@ if __name__ == "__main__":
     Xj.append(np.array([0,1]))
     Xj.append(np.array([0,0]))
 
-    y = np.array([1,0,0,0])
+    y = np.array([1,1,1,0])
 
-    and_perceptron = Perceptron(2, si=200, eta=0.1)
-    and_perceptron.train(Xj, y)
+    or_percep = Perceptron(2, i=200, eta=0.1)
+    or_percep.train(Xj, y)
 
     inputs = np.array([1,1])
-    print(and_perceptron.predict(inputs))
+    print(or_percep.predict(inputs))
 
 
     inputs = np.array([0,1])
-    print(and_perceptron.predict(inputs))
+    print(or_percep.predict(inputs))
